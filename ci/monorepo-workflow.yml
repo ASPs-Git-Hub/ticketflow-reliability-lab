@@ -1,0 +1,28 @@
+# Copy to <repo root>/.github/workflows/ticketflow-reliability-lab.yml when this lab sits in a
+# subfolder of a larger repository. Not active where it is: GitHub ignores workflows outside the root.
+name: ticketflow-reliability-lab
+on:
+  push:
+    paths: ["proofs/ticketflow-reliability-lab/**"]
+  pull_request:
+    paths: ["proofs/ticketflow-reliability-lab/**"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.10", "3.12"]
+    defaults:
+      run:
+        working-directory: proofs/ticketflow-reliability-lab
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -B -m unittest discover -s tests
+      - run: python -B scripts/run_simulation.py
+      - run: python -B scripts/run_qa_eval.py all
+      - run: python -B scripts/mutate.py

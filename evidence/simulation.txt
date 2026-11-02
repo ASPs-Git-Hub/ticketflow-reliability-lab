@@ -1,0 +1,15 @@
+Python 3.14.6 python3 -B scripts/run_simulation.py
+== fixed ==
+seed 1 cases=60 {'duplicate_cases': 0, 'unassigned_cases': 0, 'alert_twice': 0, 'alert_missing': 0, 'alert_spurious': 0, 'sla_elapsed_wrong': 0, 'clock_running_while_paused': 0, 'bounce_or_auto_opened_case': 0, 'reply_not_threaded': 0}
+seed 2 cases=60 {'duplicate_cases': 0, 'unassigned_cases': 0, 'alert_twice': 0, 'alert_missing': 0, 'alert_spurious': 0, 'sla_elapsed_wrong': 0, 'clock_running_while_paused': 0, 'bounce_or_auto_opened_case': 0, 'reply_not_threaded': 0}
+seed 3 cases=60 {'duplicate_cases': 0, 'unassigned_cases': 0, 'alert_twice': 0, 'alert_missing': 0, 'alert_spurious': 0, 'sla_elapsed_wrong': 0, 'clock_running_while_paused': 0, 'bounce_or_auto_opened_case': 0, 'reply_not_threaded': 0}
+seed 4 cases=60 {'duplicate_cases': 0, 'unassigned_cases': 0, 'alert_twice': 0, 'alert_missing': 0, 'alert_spurious': 0, 'sla_elapsed_wrong': 0, 'clock_running_while_paused': 0, 'bounce_or_auto_opened_case': 0, 'reply_not_threaded': 0}
+seed 5 cases=60 {'duplicate_cases': 0, 'unassigned_cases': 0, 'alert_twice': 0, 'alert_missing': 0, 'alert_spurious': 0, 'sla_elapsed_wrong': 0, 'clock_running_while_paused': 0, 'bounce_or_auto_opened_case': 0, 'reply_not_threaded': 0}
+TOTAL {'duplicate_cases': 0, 'unassigned_cases': 0, 'alert_twice': 0, 'alert_missing': 0, 'alert_spurious': 0, 'sla_elapsed_wrong': 0, 'clock_running_while_paused': 0, 'bounce_or_auto_opened_case': 0, 'reply_not_threaded': 0}
+== naive ==
+seed 1 cases=92 {'duplicate_cases': 8, 'unassigned_cases': 37, 'alert_twice': 55786, 'alert_missing': 1555, 'alert_spurious': 18075, 'sla_elapsed_wrong': 348, 'clock_running_while_paused': 3, 'bounce_or_auto_opened_case': 11, 'reply_not_threaded': 13}
+seed 2 cases=101 {'duplicate_cases': 9, 'unassigned_cases': 54, 'alert_twice': 64378, 'alert_missing': 2538, 'alert_spurious': 22516, 'sla_elapsed_wrong': 351, 'clock_running_while_paused': 5, 'bounce_or_auto_opened_case': 21, 'reply_not_threaded': 11}
+seed 3 cases=107 {'duplicate_cases': 9, 'unassigned_cases': 45, 'alert_twice': 65236, 'alert_missing': 1898, 'alert_spurious': 24734, 'sla_elapsed_wrong': 351, 'clock_running_while_paused': 3, 'bounce_or_auto_opened_case': 15, 'reply_not_threaded': 23}
+seed 4 cases=92 {'duplicate_cases': 6, 'unassigned_cases': 35, 'alert_twice': 61076, 'alert_missing': 1171, 'alert_spurious': 17694, 'sla_elapsed_wrong': 351, 'clock_running_while_paused': 6, 'bounce_or_auto_opened_case': 10, 'reply_not_threaded': 16}
+seed 5 cases=100 {'duplicate_cases': 9, 'unassigned_cases': 44, 'alert_twice': 66582, 'alert_missing': 1591, 'alert_spurious': 22070, 'sla_elapsed_wrong': 348, 'clock_running_while_paused': 4, 'bounce_or_auto_opened_case': 13, 'reply_not_threaded': 18}
+TOTAL {'duplicate_cases': 41, 'unassigned_cases': 215, 'alert_twice': 313058, 'alert_missing': 8753, 'alert_spurious': 105089, 'sla_elapsed_wrong': 1749, 'clock_running_while_paused': 21, 'bounce_or_auto_opened_case': 70, 'reply_not_threaded': 81}

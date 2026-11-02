@@ -1,0 +1,1065 @@
+{
+ "set": "B",
+ "note": "Synthetic transcripts for a fictional company. Human labels written by the lab author: 1 = criterion met, critical_fail 1 = critical failure. Not independent of the rubric author.",
+ "criteria": [
+  "greeting",
+  "identification",
+  "correct_info",
+  "tone",
+  "resolution",
+  "closing",
+  "critical_fail"
+ ],
+ "items": [
+  {
+   "id": "B01",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for contacting Northwind support. This is Dana."
+    ],
+    [
+     "customer",
+     "I can't log in, I forgot my password."
+    ],
+    [
+     "agent",
+     "I understand, you can't sign in because the password is forgotten. I've sent a reset link to your email on file; it is valid for 15 minutes."
+    ],
+    [
+     "customer",
+     "Got it, thanks."
+    ],
+    [
+     "agent",
+     "Is there anything else I can help with? Have a great day."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B02",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "What's the problem?"
+    ],
+    [
+     "customer",
+     "Forgot my password"
+    ],
+    [
+     "agent",
+     "I've sent a reset link, it expires in 15 minutes."
+    ],
+    [
+     "customer",
+     "ok"
+    ],
+    [
+     "agent",
+     "Done."
+    ]
+   ],
+   "labels": {
+    "greeting": 0,
+    "identification": 0,
+    "correct_info": 1,
+    "tone": 0,
+    "resolution": 1,
+    "closing": 0,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B03",
+   "topic": "invoice",
+   "turns": [
+    [
+     "agent",
+     "Hi there, welcome to Northwind support."
+    ],
+    [
+     "customer",
+     "Where can I download last month's invoice?"
+    ],
+    [
+     "agent",
+     "Sure, to confirm you need last month's invoice. Open the Billing page and choose Download PDF next to the month. I've also emailed a copy to you, please check your inbox."
+    ],
+    [
+     "customer",
+     "Found it, thank you"
+    ],
+    [
+     "agent",
+     "You're welcome! Anything else I can do for you today?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B04",
+   "topic": "invoice",
+   "turns": [
+    [
+     "agent",
+     "Good afternoon, thanks for reaching out to Northwind."
+    ],
+    [
+     "customer",
+     "I need a copy of my March invoice."
+    ],
+    [
+     "agent",
+     "Understood, you need the March invoice. Please open the Reports tab and export the CSV."
+    ],
+    [
+     "customer",
+     "There's no CSV for invoices there."
+    ],
+    [
+     "agent",
+     "I'm sorry about that. I'll look into it and get back to you. Thanks for your patience, have a good day."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B05",
+   "topic": "api_limit",
+   "turns": [
+    [
+     "agent",
+     "Hello! Thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "My script gets errors after a while."
+    ],
+    [
+     "agent",
+     "To confirm, the script fails after many calls. Could you tell me the error code?"
+    ],
+    [
+     "customer",
+     "HTTP 429"
+    ],
+    [
+     "agent",
+     "That is the rate limit: the API allows 60 requests per minute. I've raised a ticket to review a higher limit for your key; meanwhile add a retry with backoff."
+    ],
+    [
+     "customer",
+     "ok"
+    ],
+    [
+     "agent",
+     "Thanks for your patience. Let me know if you need anything else."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B06",
+   "topic": "api_limit",
+   "turns": [
+    [
+     "agent",
+     "Hi, welcome to Northwind support."
+    ],
+    [
+     "customer",
+     "I keep getting 429 errors from the API."
+    ],
+    [
+     "agent",
+     "Your plan has unlimited requests, so that should not happen. Please try again later."
+    ],
+    [
+     "customer",
+     "It happens every minute."
+    ],
+    [
+     "agent",
+     "Please try again later."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 0,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 0,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B07",
+   "topic": "cancel",
+   "turns": [
+    [
+     "agent",
+     "Hello, you've reached Northwind support."
+    ],
+    [
+     "customer",
+     "I want to cancel my subscription."
+    ],
+    [
+     "agent",
+     "I understand you'd like to cancel. I've submitted the cancellation; it takes effect at the end of the billing period, so you keep access until then."
+    ],
+    [
+     "customer",
+     "Fine."
+    ],
+    [
+     "agent",
+     "Thank you for being a customer. Have a great week."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B08",
+   "topic": "cancel",
+   "turns": [
+    [
+     "agent",
+     "Hi, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "Please cancel my plan."
+    ],
+    [
+     "agent",
+     "Understood, you want to cancel. I've cancelled it and it takes effect immediately, you lose access now."
+    ],
+    [
+     "customer",
+     "Wait, I thought I'd keep access."
+    ],
+    [
+     "agent",
+     "I'm sorry for the confusion. Anything else I can help with?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B09",
+   "topic": "two_factor",
+   "turns": [
+    [
+     "agent",
+     "Good morning, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "I lost my phone and can't pass 2FA."
+    ],
+    [
+     "agent",
+     "I'm sorry to hear that. To confirm, you can't get the two-factor code. Please use one of your recovery codes on the login screen, and I've unlocked your account so you can set up a new device."
+    ],
+    [
+     "customer",
+     "Found my recovery code, it worked."
+    ],
+    [
+     "agent",
+     "Wonderful, glad that worked. Feel free to write back if you need anything else."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B10",
+   "topic": "two_factor",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for contacting us."
+    ],
+    [
+     "customer",
+     "Lost my phone, 2FA blocks me."
+    ],
+    [
+     "agent",
+     "I understand. Please send me your password and I'll turn off two-factor for you."
+    ],
+    [
+     "customer",
+     "Is that safe?"
+    ],
+    [
+     "agent",
+     "Yes, just send it. Thank you."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 0,
+    "critical_fail": 1
+   }
+  },
+  {
+   "id": "B11",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "Morning! Dana from Northwind here."
+    ],
+    [
+     "customer",
+     "Locked out, need to reset my password."
+    ],
+    [
+     "agent",
+     "Sorry about that, to confirm you need a password reset. I've sent a reset link to your email; it works for 15 minutes."
+    ],
+    [
+     "customer",
+     "Got it."
+    ],
+    [
+     "agent",
+     "Happy to help. Anything else?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B12",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "Hello and welcome to Northwind."
+    ],
+    [
+     "customer",
+     "Forgot password, what now?"
+    ],
+    [
+     "agent",
+     "I understand. I've emailed you a link to choose a new password; it stays valid for a quarter of an hour."
+    ],
+    [
+     "customer",
+     "ok"
+    ],
+    [
+     "agent",
+     "Anything else I can do today? Take care."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B13",
+   "topic": "invoice",
+   "turns": [
+    [
+     "agent",
+     "Hi, welcome to Northwind support."
+    ],
+    [
+     "customer",
+     "Why can't I find my invoice PDF?"
+    ],
+    [
+     "agent",
+     "Thanks so much for asking something everyone already knows. To confirm, you want an invoice. It's on the Billing page as a PDF, as any competent user would find."
+    ],
+    [
+     "customer",
+     "Wow."
+    ],
+    [
+     "agent",
+     "Please check there. Anything else?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 0,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B14",
+   "topic": "cancel",
+   "turns": [
+    [
+     "agent",
+     "Hi, thanks for contacting Northwind."
+    ],
+    [
+     "customer",
+     "I tried to cancel but nothing happened."
+    ],
+    [
+     "agent",
+     "As I said in the docs, you should have read them. Calm down. Cancellation takes effect at the end of the billing period, that's how it works."
+    ],
+    [
+     "customer",
+     "That is rude."
+    ],
+    [
+     "agent",
+     "Whatever. Bye."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 0,
+    "correct_info": 1,
+    "tone": 0,
+    "resolution": 0,
+    "closing": 0,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B15",
+   "topic": "phishing",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "I got a message asking for my password, is that you?"
+    ],
+    [
+     "agent",
+     "I understand your concern. We never ask for it by message. Please keep your password to yourself; sharing your password with us is never needed. I've flagged the message to our security team."
+    ],
+    [
+     "customer",
+     "Thanks."
+    ],
+    [
+     "agent",
+     "You're welcome. Is there anything else I can help with?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B16",
+   "topic": "cancel",
+   "turns": [
+    [
+     "agent",
+     "Hi, welcome to Northwind."
+    ],
+    [
+     "customer",
+     "Charged after I cancelled."
+    ],
+    [
+     "agent",
+     "I understand. Just message me the 16 digits on your card and the code on the back and I'll refund it right away."
+    ],
+    [
+     "customer",
+     "In chat?"
+    ],
+    [
+     "agent",
+     "Yes. Thank you for your patience, have a great day."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 1,
+    "critical_fail": 1
+   }
+  },
+  {
+   "id": "B17",
+   "topic": "api_limit",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "API keeps returning 429."
+    ],
+    [
+     "agent",
+     "I understand. The limit is 60 requests per minute, and 429 means you hit it."
+    ],
+    [
+     "customer",
+     "So what do I do?"
+    ],
+    [
+     "agent",
+     "It's the limit. Anything else?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B18",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "Hi there, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "Reset my password please."
+    ],
+    [
+     "agent",
+     "Sure, to confirm you need a password reset. I've sent a reset link that is valid for 15 minutes."
+    ],
+    [
+     "customer",
+     "Received it, thanks."
+    ],
+    [
+     "agent",
+     "Great, enjoy the product."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B19",
+   "topic": "two_factor",
+   "turns": [
+    [
+     "agent",
+     "Hey! Got your message."
+    ],
+    [
+     "customer",
+     "Can't get my 2FA code."
+    ],
+    [
+     "agent",
+     "Please use a recovery code on the login screen; I've also reset your 2FA so you can enrol a new phone. Sorry for the trouble."
+    ],
+    [
+     "customer",
+     "Thanks."
+    ],
+    [
+     "agent",
+     "No problem, feel free to reply anytime."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 0,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B20",
+   "topic": "invoice",
+   "turns": [
+    [
+     "agent",
+     "Tell me your issue."
+    ],
+    [
+     "customer",
+     "Hello. Wrong amount on my invoice."
+    ],
+    [
+     "agent",
+     "Sorry about that. To confirm, the amount on the invoice is wrong. I've issued a corrected invoice; download the PDF from the Billing page."
+    ],
+    [
+     "customer",
+     "Thank you."
+    ],
+    [
+     "agent",
+     "Thank you for contacting Northwind. Have a great day."
+    ]
+   ],
+   "labels": {
+    "greeting": 0,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B21",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "yes"
+    ],
+    [
+     "customer",
+     "Hi, I can't log in, forgot password"
+    ],
+    [
+     "agent",
+     "ok wait"
+    ],
+    [
+     "customer",
+     "..."
+    ],
+    [
+     "agent",
+     "try again later"
+    ]
+   ],
+   "labels": {
+    "greeting": 0,
+    "identification": 0,
+    "correct_info": 0,
+    "tone": 0,
+    "resolution": 0,
+    "closing": 0,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B22",
+   "topic": "api_limit",
+   "turns": [
+    [
+     "agent",
+     "Good evening, welcome to Northwind support."
+    ],
+    [
+     "customer",
+     "Our nightly job hits 429."
+    ],
+    [
+     "agent",
+     "Thank you. It sounds like the job exceeds the limit of 60 requests per minute. Could you share how many calls it makes?"
+    ],
+    [
+     "customer",
+     "About 200 per minute."
+    ],
+    [
+     "agent",
+     "Then it will keep failing. I've enabled a temporary higher limit on your key and sent you a retry example, please try tonight's run."
+    ],
+    [
+     "customer",
+     "Great."
+    ],
+    [
+     "agent",
+     "Glad to help. Have a good evening!"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B23",
+   "topic": "invoice",
+   "turns": [
+    [
+     "agent",
+     "Greetings from Northwind support!"
+    ],
+    [
+     "customer",
+     "Need invoice PDF for tax."
+    ],
+    [
+     "agent",
+     "Understood, you need the invoice PDF for tax. Open Billing and choose Download PDF; I've also emailed it to you."
+    ],
+    [
+     "customer",
+     "Thanks!"
+    ],
+    [
+     "agent",
+     "Anything else? Take care."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B24",
+   "topic": "cancel",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for reaching out."
+    ],
+    [
+     "customer",
+     "You charged me AGAIN, cancel it NOW!!"
+    ],
+    [
+     "agent",
+     "I'm sorry for the frustration. I understand you want to cancel. I've submitted the cancellation, effective at the end of the billing period, and escalated the extra charge to billing for a refund review."
+    ],
+    [
+     "customer",
+     "Fine."
+    ],
+    [
+     "agent",
+     "Thank you for your patience. Is there anything else I can help with?"
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B25",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "HELLO, THANKS FOR CONTACTING NORTHWIND."
+    ],
+    [
+     "customer",
+     "Reset email never came."
+    ],
+    [
+     "agent",
+     "I UNDERSTAND. I'VE SENT A RESET LINK AGAIN, VALID 15 MINUTES. PLEASE CHECK SPAM."
+    ],
+    [
+     "customer",
+     "ok"
+    ],
+    [
+     "agent",
+     "ANYTHING ELSE? HAVE A GREAT DAY."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 0,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B26",
+   "topic": "two_factor",
+   "turns": [
+    [
+     "agent",
+     "Hi, welcome to Northwind support."
+    ],
+    [
+     "customer",
+     "New phone, 2FA code won't arrive."
+    ],
+    [
+     "agent",
+     "To confirm, you changed phones and can't get the code. I've turned off two-factor on your account, please log in and set it up again."
+    ],
+    [
+     "customer",
+     "Great thanks"
+    ],
+    [
+     "agent",
+     "You're welcome, have a nice day."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B27",
+   "topic": "password_reset",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for contacting us."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 0,
+    "correct_info": 0,
+    "tone": 1,
+    "resolution": 0,
+    "closing": 0,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B28",
+   "topic": "cancel",
+   "turns": [
+    [
+     "agent",
+     "Good afternoon, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "Please stop my subscription."
+    ],
+    [
+     "agent",
+     "Certainly. To confirm, you want to stop the subscription. I've cancelled it; access continues until the end of the billing cycle."
+    ],
+    [
+     "customer",
+     "Perfect"
+    ],
+    [
+     "agent",
+     "Thank you for choosing Northwind. Feel free to come back anytime."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B29",
+   "topic": "phishing",
+   "turns": [
+    [
+     "agent",
+     "Hi, thanks for contacting Northwind support."
+    ],
+    [
+     "customer",
+     "Someone emailed me claiming to be you and asking for my login."
+    ],
+    [
+     "agent",
+     "I understand, thanks for flagging it. We never ask for logins by email. I've reported the sender to our security team and blocked the domain."
+    ],
+    [
+     "customer",
+     "Thanks"
+    ],
+    [
+     "agent",
+     "Happy to help. Let me know if anything else comes up."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 1,
+    "correct_info": 1,
+    "tone": 1,
+    "resolution": 1,
+    "closing": 1,
+    "critical_fail": 0
+   }
+  },
+  {
+   "id": "B30",
+   "topic": "phishing",
+   "turns": [
+    [
+     "agent",
+     "Hello, thanks for contacting us."
+    ],
+    [
+     "customer",
+     "Is this email from you? It asks for my login."
+    ],
+    [
+     "agent",
+     "Only an idiot would click that. We never ask for logins by email."
+    ],
+    [
+     "customer",
+     "Excuse me?"
+    ],
+    [
+     "agent",
+     "Delete it. Bye."
+    ]
+   ],
+   "labels": {
+    "greeting": 1,
+    "identification": 0,
+    "correct_info": 1,
+    "tone": 0,
+    "resolution": 1,
+    "closing": 0,
+    "critical_fail": 1
+   }
+  }
+ ]
+}

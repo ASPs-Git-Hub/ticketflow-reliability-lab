@@ -1,0 +1,69 @@
+Python 3.14.6 python3 -B scripts/run_qa_eval.py all
+=== set A: 30 transcripts, TUNED (optimistic) ===
+greeting        30/30  agreement 1.000  Wilson95 [0.886, 1.000]  kappa n/a
+identification  29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.93
+correct_info    30/30  agreement 1.000  Wilson95 [0.886, 1.000]  kappa 1.00
+tone            30/30  agreement 1.000  Wilson95 [0.886, 1.000]  kappa 1.00
+resolution      26/30  agreement 0.867  Wilson95 [0.703, 0.947]  kappa 0.66
+closing         30/30  agreement 1.000  Wilson95 [0.886, 1.000]  kappa 1.00
+critical_fail   30/30  agreement 1.000  Wilson95 [0.886, 1.000]  kappa 1.00
+derived verdict 29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.93
+critical-fail detection: tp 2 fp 0 fn 0 precision 1.00 recall 1.00
+disagreements (5):
+  A18 identification auto=1 human=0
+  A11 resolution     auto=0 human=1
+  A12 resolution     auto=0 human=1
+  A14 resolution     auto=1 human=0
+  A23 resolution     auto=0 human=1
+
+=== set B: 30 transcripts, REGRESSION SET (frozen labels, 14 turns repeat A, re-scored after the round 2 fix pass) ===
+greeting        28/30  agreement 0.933  Wilson95 [0.787, 0.982]  kappa 0.71
+identification  29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.90
+correct_info    29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.92
+tone            29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.89
+resolution      27/30  agreement 0.900  Wilson95 [0.744, 0.965]  kappa 0.75
+closing         29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.91
+critical_fail   29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.78
+derived verdict 28/30  agreement 0.933  Wilson95 [0.787, 0.982]  kappa 0.84
+critical-fail detection: tp 2 fp 0 fn 1 precision 1.00 recall 0.67
+disagreements (10):
+  B11 greeting       auto=0 human=1
+  B23 greeting       auto=0 human=1
+  B19 identification auto=1 human=0
+  B12 correct_info   auto=0 human=1
+  B13 tone           auto=1 human=0
+  B08 resolution     auto=1 human=0
+  B16 resolution     auto=1 human=0
+  B30 resolution     auto=0 human=1
+  B18 closing        auto=0 human=1
+  B16 critical_fail  auto=0 human=1
+
+=== set C: 30 transcripts, LEAST CONTAMINATED (written after the fix pass, not tuned against) ===
+greeting        29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.65
+identification  29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.93
+correct_info    28/30  agreement 0.933  Wilson95 [0.787, 0.982]  kappa 0.86
+tone            29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.87
+resolution      22/30  agreement 0.733  Wilson95 [0.556, 0.858]  kappa 0.49
+closing         27/30  agreement 0.900  Wilson95 [0.744, 0.965]  kappa 0.67
+critical_fail   29/30  agreement 0.967  Wilson95 [0.833, 0.994]  kappa 0.65
+derived verdict 27/30  agreement 0.900  Wilson95 [0.744, 0.965]  kappa 0.80
+critical-fail detection: tp 1 fp 0 fn 1 precision 1.00 recall 0.50
+disagreements (17):
+  C13 greeting       auto=0 human=1
+  C17 identification auto=0 human=1
+  C03 correct_info   auto=0 human=1
+  C30 correct_info   auto=0 human=1
+  C05 tone           auto=1 human=0
+  C13 resolution     auto=0 human=1
+  C15 resolution     auto=0 human=1
+  C17 resolution     auto=1 human=0
+  C22 resolution     auto=0 human=1
+  C23 resolution     auto=0 human=1
+  C26 resolution     auto=0 human=1
+  C27 resolution     auto=0 human=1
+  C30 resolution     auto=0 human=1
+  C20 closing        auto=1 human=0
+  C25 closing        auto=0 human=1
+  C29 closing        auto=0 human=1
+  C05 critical_fail  auto=0 human=1
+
