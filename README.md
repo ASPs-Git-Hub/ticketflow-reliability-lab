@@ -1,15 +1,13 @@
 # TicketFlow Reliability Lab
 
-Status: BUILT_UNVERIFIED. Author-run results only. The CI workflow has never run on a remote.
-Review round 2 (two independent reviews, 45 findings) was applied on 2026-11-03; see
-`docs/REVIEW_ROUND2.md` for the accept / reject table. Nothing here has been reviewed a third time.
+Status: **CI-PASSING**, independent evaluation pending. Last full remote CI run: commit `011a310`, [run 41516530731](https://github.com/ASPs-Git-Hub/ticketflow-reliability-lab/actions/runs/41516530731), on Python 3.9, 3.10 and 3.12: unit tests, the simulation, the QA evaluation and the mutation check. The confidentiality gate (`check-confidential.sh`) was run locally by me, not in CI. Every label set was written by me with an AI model, so none is independent human labelling. Internal label: BUILT_UNVERIFIED until someone outside this project reproduces the results.
+I applied review round 2 (two independent reviews, 45 findings) on 2026-11-03; see
+`docs/REVIEW_ROUND2.md` for the accept / reject table. Nobody has reviewed the result a third time.
 
-An independent, synthetic-data demonstration of the reliability problems that show up when a
-help desk handles email: duplicate cases, replies that open new cases, bounces that open cases,
+An independent, synthetic-data demonstration of the reliability problems a help desk runs into when it handles email: duplicate cases, replies that open new cases, bounces that open cases,
 SLA clocks that ignore business hours, alerts that fire forever, unassigned cases, and QA scoring
 that nobody has checked against human judgement. Fictional company ("Northwind Cloud"), Python 3
-standard library only (3.9 and later), built from general engineering patterns. No real helpdesk,
-employer or customer data is involved.
+standard library only (3.9 and later), built from general engineering patterns. No real helpdesk or customer data is involved.
 
 ## Layout
 
@@ -40,13 +38,12 @@ Run: `python3 -B -m unittest discover -s tests`
 
 CI note: GitHub only reads `.github/workflows/` at a repository root. The workflow in this folder
 works when the folder is its own repo. Inside a monorepo, copy `ci/monorepo-workflow.yml` to the
-monorepo root (it sets `working-directory` and a path filter). That copy has not been made and
-nothing has run on a remote.
+monorepo root (it sets `working-directory` and a path filter). That copy has not been made; the standalone public repository's own workflow has run once and passed.
 
 ## Results (all produced by the commands in evidence/)
 
 Tests: 212 run, all pass, on Python 3.14.6, 3.12 and 3.9.6 (evidence/test-run.txt, test-run-py312.txt,
-test-run-py39.txt). Python 3.10 is in the CI matrix but was not run locally.
+test-run-py39.txt). Python 3.10 ran only in CI.
 
 Contract tests: 18 tests, each targeting one naive defect. They run against both implementations.
 TicketFlow passes all 18. NaiveTicketFlow is caught by all 18: 17 by an AssertionError and one
@@ -81,17 +78,16 @@ movement while waiting.
 | bounce or auto-reply opened a case | 0 | 70 |
 | reply not threaded to its case | 0 | 81 |
 
-Read the naive column as "re-fires at every tick and uses wall-clock minutes", not as a measured
-magnitude: 313058 is hourly ticks times cases times rules over 13 days and would change with the tick
-rate. The per-category claim (the fixed flow is 0, the naive flow is above 0 in every category) is what
-the tests assert. Earlier README text explained a zero for one naive seed; that explanation was wrong
-and the per-seed claim was removed.
+Read the naive column as "re-fires at every tick and uses wall-clock minutes". It is not a measured
+magnitude: 313058 is hourly ticks times cases times rules over 13 days, and it would change with the tick
+rate. The tests assert only the per-category claim (the fixed flow is 0, the naive flow is above 0 in every category). Earlier README text explained a zero for one naive seed. That explanation was wrong
+and I removed the per-seed claim.
 
 Must-fire controls in `tests/test_sim.py`, each a flow with one planted defect that the audit must
 fail: no pause while waiting, cooldown 0, cooldown 60 minutes, `tick()` returning nothing, a frozen
 clock (both clocks, resolution only, first response only), a wall-clock first response, and a flow that
-never indexes the agent's outbound message-id. The fixed flow's zero is therefore a statement against
-an audit that is known to be able to fail.
+never indexes the agent's outbound message-id. So the fixed flow's zero is measured by an audit that is known
+to be able to fail.
 
 ### Mutation (scripts/mutate.py)
 
@@ -100,14 +96,14 @@ see evidence/mutation-run.txt for the exact count and for whether each kill was 
 an import crash. The list covers the previous mutants (renamed where the code moved) and new ones for
 authenticated threading, outbound indexing, late-parent reconciliation, the reducer ordering, bounce
 and auto-reply evidence, RFC 3834 parsing, quote stripping, clause-local negation, and the audit
-itself. A pass is a statement about these mutants, not about all possible defects. Round 1 had 2
+itself. A pass covers these mutants only, not all possible defects. Round 1 had 2
 survivors that were fixed by strengthening tests; round 2 found 2 more survivors in its own new
 mutants (a critical-fail recall miscount and an audit that skipped the resolution clock), which were
 also fixed by strengthening tests.
 
 ### QA scoring against labels
 
-IMPORTANT, read before quoting any number: all three label sets were written by the same author
+Read this before quoting any number: all three label sets were written by the same author
 model that wrote the rubric and the scorer. There is one labeller, so there is no inter-human
 agreement figure and none of these figures is independent human labelling. "Derived verdict" is the
 scorer's own weights applied to the labelled per-criterion values; it is not a separate human overall
@@ -121,10 +117,10 @@ judgement.
   further facts: 14 of B's 90 agent turns are copied verbatim from A (the file is frozen and was not
   edited; a test pins the 14), and the two sets share one template. B moved after the fix pass
   (critical fail 28/30 to 29/30, derived verdict 27/30 to 28/30) as a side effect of narrowing the
-  secret-request pattern; it was not a tuning target. The honest claim is "regression-checked".
+  secret-request pattern; it was not a tuning target. The accurate description is "regression-checked".
 - Set C (30): written after the fix pass, with no agent turn repeated from A or B (a test enforces
   it), scored once, and not tuned against. Still the same author model, using the written rules in
-  `docs/LABELING_RULES.md`. This is the least contaminated of the three, and it is still not independent.
+  `docs/LABELING_RULES.md`. It is the least contaminated of the three, but it is still not independent.
 
 Set C (n = 30), the least contaminated:
 
@@ -174,8 +170,8 @@ From C (not tuned against, so these stay):
   after a rude reply.
 - C05 tone: a courtesy word hides a pushy demand.
 
-These are surface-pattern limits, not bugs to patch away: a pattern list can always be beaten by a
-paraphrase, and patching them against B or C would turn those sets into tuning sets.
+These come from matching surface patterns. A pattern list can always be beaten by a
+paraphrase, and patching against B or C would turn those sets into tuning sets, so I left them.
 
 ## What this does NOT prove
 
@@ -184,7 +180,7 @@ paraphrase, and patching them against B or C would turn those sets into tuning s
 - Rule-based QA is not language understanding. It checks words and shapes. It cannot tell whether
   advice is correct in substance, and it can be gamed by including the right phrases.
 - The labels come from one author model that also wrote the rules. Agreement here measures consistency
-  with that author, not with a trained QA team. No second labeller has seen any set.
+  with that author. It says nothing about agreement with a trained QA team. No second labeller has seen any set.
 - B is not a held-out set (see above), and C is the same author's work. No QA number here is an accuracy.
 - Threading treats a message-id as a capability: anyone holding a case's message-id can thread into it.
   A signed reply token would be stronger and is not implemented. A subject token needs a known participant.
@@ -195,9 +191,9 @@ paraphrase, and patching them against B or C would turn those sets into tuning s
 - Lowercasing message-ids merges ids that differ only in local-part case.
 - No integration with any real helpdesk, mail server or ticketing API. The "email" is a dict.
 - The simulation audit checks nine invariants against an oracle written by the same author. Passing them
-  does not mean the system is correct in general; the oracle shares the author's idea of correct.
+  does not mean the system is correct in general, because the oracle shares the author's idea of correct.
 - Business hours are Monday to Friday 09:00 to 17:00 local, no holidays, one calendar. The default calendar
   still comes from the email `tz` field (a simulation device); `tz_by_queue` is the realistic option and is
   only unit tested.
 - Single process, in memory, no persistence, no concurrency control, restart loses deduplication.
-- CI has not run remotely; Python 3.10 was not exercised locally.
+- CI ran once remotely (commit `011a310`) and passed on 3.9, 3.10 and 3.12; that is a second execution of my own scripts, not independent validation.

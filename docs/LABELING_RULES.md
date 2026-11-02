@@ -1,9 +1,9 @@
 # Operational labeling rules for the QA label sets
 
-Written in review round 2 (2026-11-03) so that labels can be adjudicated by someone other than the
-author. Sets A, B and C were labelled by the same author model before or without a second labeller;
-this file records the rules the labels are meant to follow, so a second labeller can disagree with
-them in a checkable way.
+Written in review round 2 (2026-11-03) so that someone other than the author can adjudicate the labels.
+Sets A, B and C were labelled by the same author model before or without a second labeller.
+This file records the rules the labels are meant to follow, so a second labeller can disagree with
+them in a way that can be checked.
 
 Labels are 1 (criterion met) or 0. `critical_fail` 1 means a critical failure. Only agent turns are judged.
 

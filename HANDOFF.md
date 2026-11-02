@@ -13,7 +13,7 @@ late-parent reconciliation, strong-evidence bounce and auto-reply detection (RFC
 clause-local negation in the QA critical-fail rule, word-boundary routing, a simulation audit judged by
 an independent oracle, set C, 111 mutants, a Python 3.9 compatible CI matrix.
 
-## Results actually executed (author machine, 2026-11-03)
+## Results actually executed (my machine, 2026-11-03)
 
 See evidence/ for the raw output. Tests: 212, pass on Python 3.14.6, 3.12 and 3.9.6. Simulation: fixed
 zero in all nine categories, naive above zero in all nine. Mutation: see evidence/mutation-run.txt.
@@ -28,7 +28,7 @@ check-confidential.sh output: evidence/check-confidential.txt.
 - A message-id is a threading capability; no signed reply token.
 - The audit oracle is written by the same author as the implementation.
 - Python 3.10 and the GitHub workflow never ran; the monorepo copy of the workflow is not in place.
-- evidence/ was produced on the author machine, not in CI.
+- evidence/ was produced on my machine, not in CI.
 
 ## Next action
 

@@ -2,12 +2,12 @@
 
 Date: 2026-11-03. Inputs, verbatim: a ChatGPT review (21 findings, referred to as C1 to C21 in the order
 printed) and a Claude (Fable) review (24 findings: 0 P0, 6 P1, 11 P2, 7 P3, referred to as F1 to F24 in the
-order printed). 21 + 24 = 45 findings, 45 rows below. Duplicates are merged explicitly: the row names the
-finding it duplicates and is fixed under that row. Every finding was traced to the code before a verdict.
+order printed). 21 + 24 = 45 findings, 45 rows below. Duplicates are merged: the row names the
+finding it duplicates, and the fix is recorded under that row. I traced every finding to the code before giving a verdict.
 
 Status words: FIXED (code and test changed, test executed), PARTIAL (part fixed, remainder stated),
 DUPLICATE (same defect as the named row), REJECTED (reviewer wrong or out of scope, evidence given).
-A fix is BUILT_UNVERIFIED until CI has run remotely; the evidence in evidence/ is author-run.
+A fix is BUILT_UNVERIFIED until CI has run remotely. The evidence in evidence/ comes from my own runs.
 
 | # | Sev | Finding (short) | Verdict | What changed / evidence |
 |---|---|---|---|---|
