@@ -1,0 +1,9 @@
+nodejs/node W1 search total_count 61 fetched 61
+nodejs/node W2 search total_count 48 fetched 48
+nodejs/node W3 search total_count 66 fetched 66
+pandas-dev/pandas W1 search total_count 37 fetched 37
+pandas-dev/pandas W2 search total_count 30 fetched 30
+pandas-dev/pandas W3 search total_count 48 fetched 48
+hashicorp/terraform W1 search total_count 25 fetched 25
+hashicorp/terraform W2 search total_count 24 fetched 24
+hashicorp/terraform W3 search total_count 24 fetched 24

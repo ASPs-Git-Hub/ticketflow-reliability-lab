@@ -1,0 +1,3 @@
+  147  thread intact
+missing parent ids referenced by 2+ opening messages: 150
+cases total 218 ignored 0 flagged 0

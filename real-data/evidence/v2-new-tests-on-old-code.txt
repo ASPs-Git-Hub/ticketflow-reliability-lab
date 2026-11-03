@@ -1,0 +1,205 @@
+.FF.FFFFFFFFF.FF..FFF
+======================================================================
+FAIL: test_chain_with_only_in_reply_to_arriving_middle_out (test_merge.CyclesAndChains.test_chain_with_only_in_reply_to_arriving_middle_out)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 91, in test_chain_with_only_in_reply_to_arriving_middle_out
+    one_case_with(self, f, ["m%d@x" % i for i in range(5)])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 13, in one_case_with
+    test.assertEqual(len(f.cases), 1, sorted(f.cases))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 3 != 1 : ['TF-000001', 'TF-000002', 'TF-000003']
+
+======================================================================
+FAIL: test_every_delivery_order_of_a_small_tree_gives_one_case (test_merge.CyclesAndChains.test_every_delivery_order_of_a_small_tree_gives_one_case)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 113, in test_every_delivery_order_of_a_small_tree_gives_one_case
+    self.assertEqual(len(f.cases), 1, order)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : ('a', 'b', 'r', 'c', 'd', 'e')
+
+======================================================================
+FAIL: test_creation_time_is_the_earliest_of_the_merged_cases (test_merge.MergeBookkeeping.test_creation_time_is_the_earliest_of_the_merged_cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 214, in test_creation_time_is_the_earliest_of_the_merged_cases
+    self.assertEqual(f.cases[a]["created_at"], D(2026, 3, 2, 10))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: datetime.datetime(2026, 3, 2, 11, 0, tzinfo=datetime.timezone.utc) != datetime.datetime(2026, 3, 2, 10, 0, tzinfo=datetime.timezone.utc)
+
+======================================================================
+FAIL: test_customer_mail_of_an_absorbed_case_reopens_after_an_earlier_resolve (test_merge.MergeBookkeeping.test_customer_mail_of_an_absorbed_case_reopens_after_an_earlier_resolve)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 224, in test_customer_mail_of_an_absorbed_case_reopens_after_an_earlier_resolve
+    self.assertEqual(f.cases[a]["status"], "open")  # c2 wrote at 11:00, after the resolve
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'resolved' != 'open'
+- resolved
++ open
+
+
+======================================================================
+FAIL: test_ids_absorbed_in_two_steps_still_resolve (test_merge.MergeBookkeeping.test_ids_absorbed_in_two_steps_still_resolve)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 243, in test_ids_absorbed_in_two_steps_still_resolve
+    self.assertEqual(sorted(f.cases), [c1, c2])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['TF-000001', 'TF-000002', 'TF-000003'] != ['TF-000001', 'TF-000002']
+
+First list contains 1 additional elements.
+First extra element 2:
+'TF-000003'
+
+- ['TF-000001', 'TF-000002', 'TF-000003']
+?                          -------------
+
++ ['TF-000001', 'TF-000002']
+
+======================================================================
+FAIL: test_participants_of_both_cases_are_kept (test_merge.MergeBookkeeping.test_participants_of_both_cases_are_kept)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 231, in test_participants_of_both_cases_are_kept
+    self.assertEqual(sorted(f.cases[a]["participants"]), ["alex@cust.example", "sam@other.example"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['alex@cust.example'] != ['alex@cust.example', 'sam@other.example']
+
+Second list contains 1 additional elements.
+First extra element 1:
+'sam@other.example'
+
+- ['alex@cust.example']
++ ['alex@cust.example', 'sam@other.example']
+
+======================================================================
+FAIL: test_message_that_bridges_two_pending_parents (test_merge.ParentWithItsOwnConnection.test_message_that_bridges_two_pending_parents)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 133, in test_message_that_bridges_two_pending_parents
+    one_case_with(self, f, ["k1@x", "k2@x", "p1@x", "p2@x"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 13, in one_case_with
+    test.assertEqual(len(f.cases), 1, sorted(f.cases))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : ['TF-000001', 'TF-000002']
+
+======================================================================
+FAIL: test_parent_that_replies_to_an_indexed_case_joins_both (test_merge.ParentWithItsOwnConnection.test_parent_that_replies_to_an_indexed_case_joins_both)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 124, in test_parent_that_replies_to_an_indexed_case_joins_both
+    one_case_with(self, f, ["root@x", "mid@x", "kid@x"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 13, in one_case_with
+    test.assertEqual(len(f.cases), 1, sorted(f.cases))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : ['TF-000001', 'TF-000002']
+
+======================================================================
+FAIL: test_agent_work_on_a_loser_case_survives_the_merge (test_merge.SafetyAfterMerge.test_agent_work_on_a_loser_case_survives_the_merge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 179, in test_agent_work_on_a_loser_case_survives_the_merge
+    self.assertEqual(case["first_response_at"], D(2026, 3, 2, 11, 30))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != datetime.datetime(2026, 3, 2, 11, 30, tzinfo=datetime.timezone.utc)
+
+======================================================================
+FAIL: test_alert_on_a_merged_case_is_cleared (test_merge.SafetyAfterMerge.test_alert_on_a_merged_case_is_cleared)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 192, in test_alert_on_a_merged_case_is_cleared
+    self.assertEqual(len(f.cases), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_forged_subject_token_still_does_not_merge_or_attach (test_merge.SafetyAfterMerge.test_forged_subject_token_still_does_not_merge_or_attach)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 159, in test_forged_subject_token_still_does_not_merge_or_attach
+    self.assertEqual(len(f.cases), 2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 3 != 2
+
+======================================================================
+FAIL: test_redelivery_of_the_merging_message_is_a_duplicate (test_merge.SafetyAfterMerge.test_redelivery_of_the_merging_message_is_a_duplicate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 146, in test_redelivery_of_the_merging_message_is_a_duplicate
+    self.assertEqual((r2["action"], r2["case_id"]), ("duplicate", next(iter(f.cases))))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('duplicate', 'TF-000002') != ('duplicate', 'TF-000001')
+
+First differing element 1:
+'TF-000002'
+'TF-000001'
+
+- ('duplicate', 'TF-000002')
+?                        ^
+
++ ('duplicate', 'TF-000001')
+?                        ^
+
+
+======================================================================
+FAIL: test_token_of_a_merged_case_resolves_for_its_participants (test_merge.SafetyAfterMerge.test_token_of_a_merged_case_resolves_for_its_participants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 168, in test_token_of_a_merged_case_resolves_for_its_participants
+    self.assertEqual(r["case_id"], a)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 'TF-000002' != 'TF-000001'
+- TF-000002
+?         ^
++ TF-000001
+?         ^
+
+
+======================================================================
+FAIL: test_surviving_case_is_the_oldest_id_and_the_other_id_still_resolves (test_merge.SharedMissingParent.test_surviving_case_is_the_oldest_id_and_the_other_id_still_resolves)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 36, in test_surviving_case_is_the_oldest_id_and_the_other_id_still_resolves
+    self.assertEqual(list(f.cases), [a])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['TF-000001', 'TF-000002'] != ['TF-000001']
+
+First list contains 1 additional elements.
+First extra element 1:
+'TF-000002'
+
+- ['TF-000001', 'TF-000002']
++ ['TF-000001']
+
+======================================================================
+FAIL: test_three_orphans_one_parent (test_merge.SharedMissingParent.test_three_orphans_one_parent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 46, in test_three_orphans_one_parent
+    one_case_with(self, f, ["c0@x", "c1@x", "c2@x", "p@x"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 13, in one_case_with
+    test.assertEqual(len(f.cases), 1, sorted(f.cases))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 3 != 1 : ['TF-000001', 'TF-000002', 'TF-000003']
+
+======================================================================
+FAIL: test_two_orphans_then_their_parent_end_in_one_case (test_merge.SharedMissingParent.test_two_orphans_then_their_parent_end_in_one_case)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 26, in test_two_orphans_then_their_parent_end_in_one_case
+    case = one_case_with(self, f, ["c1@x", "c2@x", "p@x"])
+  File "/private/tmp/claude-501/-Users-asp-Library-Application-Support-Claude-scratch-workspaces-d3545306-eb30-4335-8dfb-67aba12779e6-298fff9e-d0b9-4a84-bca4-4ce4f1e161de-scratch-2026-11-02-a3dae9/4f948326-525b-48e2-9c1a-2035a30a0d70/scratchpad/oldlab2_12884/tests/test_merge.py", line 13, in one_case_with
+    test.assertEqual(len(f.cases), 1, sorted(f.cases))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : ['TF-000001', 'TF-000002']
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.017s
+
+FAILED (failures=16)

@@ -1,0 +1,6 @@
+seed 1: dropped In-Reply-To 134, dropped both 67 | ceiling 125 of 147 | lab exact 122 | lost to damage 22 | oracle components 245, lab reproduced 241, gap {'lab split it, bridged': 4}
+seed 2: dropped In-Reply-To 134, dropped both 67 | ceiling 123 of 147 | lab exact 117 | lost to damage 24 | oracle components 250, lab reproduced 244, gap {'lab split it, bridged': 6}
+seed 3: dropped In-Reply-To 134, dropped both 67 | ceiling 128 of 147 | lab exact 123 | lost to damage 19 | oracle components 243, lab reproduced 237, gap {'lab split it, bridged': 6}
+seed 4: dropped In-Reply-To 134, dropped both 67 | ceiling 130 of 147 | lab exact 125 | lost to damage 17 | oracle components 237, lab reproduced 231, gap {'lab split it, bridged': 6}
+seed 5: dropped In-Reply-To 134, dropped both 67 | ceiling 123 of 147 | lab exact 122 | lost to damage 24 | oracle components 247, lab reproduced 245, gap {'lab split it, bridged': 2}
+mean over seeds: ceiling 125.8, lab exact 121.8 (of 147 threads of size 2+)

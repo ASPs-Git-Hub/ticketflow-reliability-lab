@@ -26,6 +26,9 @@ class TicketFlow:
 
     def ingest(self, email, now=None):
         result = self.ingestor.ingest(email)
+        for gone in result.get("merged", ()):  # an absorbed case has no clock of its own any more
+            for rule, (_clock, _state, severity) in RULES.items():
+                self.escalator.observe(gone, rule, severity, False, result["at"])
         if result["action"] in ("created", "threaded"):
             kind = "created" if result["action"] == "created" else "customer_reply"
             self.events.append({"at": result["at"], "case_id": result["case_id"], "kind": kind})
@@ -33,7 +36,7 @@ class TicketFlow:
 
     def _valid_event(self, case_id, at):
         """Case for an agent-side event, or None: unknown case, naive time, or time before creation."""
-        case = self.cases.get(case_id)
+        case = self.cases.get(self.ingestor.resolve(case_id))
         if case is None or not is_aware(at) or at < case["created_at"]:
             return None
         return case
@@ -44,6 +47,7 @@ class TicketFlow:
         case = self._valid_event(case_id, at)
         if case is None:
             return False
+        case_id = case["id"]
         if case["first_response_at"] is None or at < case["first_response_at"]:
             case["first_response_at"] = at
         if message_id is None:
@@ -58,12 +62,13 @@ class TicketFlow:
         case = self._valid_event(case_id, at)
         if case is None or status not in STATUSES:
             return False
+        case_id = case["id"]
         if add_event(case, at, status, RANK_AGENT, self.ingestor.next_seq() if seq is None else seq):
             self.events.append({"at": at, "case_id": case_id, "kind": "status:" + status})
         return True
 
     def sla(self, case_id, now):
-        return sla.evaluate(self.cases[case_id], now, self.targets)
+        return sla.evaluate(self.cases[self.ingestor.resolve(case_id)], now, self.targets)
 
     def tick(self, now):
         out = []

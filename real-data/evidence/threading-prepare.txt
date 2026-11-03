@@ -1,0 +1,7 @@
+stat chunks 1619
+stat duplicate_id_in_archive 1
+stat messages_kept 1618
+full set: messages 1618 truth threads 218 of size>=2 147 largest 77
+size distribution (size:count) {1: 71, 2: 27, 3: 23, 4: 17, 5: 13, 6: 4, 7: 7, 8: 7, 9: 4, 10: 4, 11: 2, 12: 1} ...
+frozen sample: messages 1066 threads 136 bytes 189906
+archive messages with empty subject: 0

@@ -1,0 +1,155 @@
+== sample accounting (per repo, window) ==
+repo                   win search_total  fetched   bot  internal  unanswered  answered     c>100
+hashicorp/terraform    W1            25       25     0         1          13        11         0
+hashicorp/terraform    W2            24       24     0         1          10        13         0
+hashicorp/terraform    W3            24       24     0         0          13        11         0
+nodejs/node            W1            61       61     0        11          17        33         0
+nodejs/node            W2            48       48     0         7          17        24         0
+nodejs/node            W3            66       66     0        10          33        23         0
+pandas-dev/pandas      W1            37       37     0         8           6        23         0
+pandas-dev/pandas      W2            30       30     0         0           4        26         0
+pandas-dev/pandas      W3            48       48     0         9           7        32         0
+answered tickets total: 196 {'hashicorp/terraform': 35, 'nodejs/node': 80, 'pandas-dev/pandas': 81}
+wall-clock wait to first maintainer reply, minutes: p25 187 median 817 p75 3053 p90 23402
+
+== first-response target high = 120 minutes (n = answered tickets) ==
+zone                 scope          n naive_breach fixed_breach naive_only fixed_only naive_only%
+UTC                  ALL          196          152          116         36          0    18.4%
+UTC                  terraform     35           24           18          6          0    17.1%
+UTC                  node          80           59           46         13          0    16.2%
+UTC                  pandas        81           69           52         17          0    21.0%
+America/Los_Angeles  ALL          196          152          112         40          0    20.4%
+America/Los_Angeles  terraform     35           24           13         11          0    31.4%
+America/Los_Angeles  node          80           59           44         15          0    18.8%
+America/Los_Angeles  pandas        81           69           55         14          0    17.3%
+America/New_York     ALL          196          152          114         38          0    19.4%
+America/New_York     terraform     35           24           13         11          0    31.4%
+America/New_York     node          80           59           43         16          0    20.0%
+America/New_York     pandas        81           69           58         11          0    13.6%
+Europe/London        ALL          196          152          115         37          0    18.9%
+Europe/London        terraform     35           24           19          5          0    14.3%
+Europe/London        node          80           59           45         14          0    17.5%
+Europe/London        pandas        81           69           51         18          0    22.2%
+Europe/Berlin        ALL          196          152          112         40          0    20.4%
+Europe/Berlin        terraform     35           24           19          5          0    14.3%
+Europe/Berlin        node          80           59           44         15          0    18.8%
+Europe/Berlin        pandas        81           69           49         20          0    24.7%
+Asia/Kolkata         ALL          196          152          103         49          0    25.0%
+Asia/Kolkata         terraform     35           24           16          8          0    22.9%
+Asia/Kolkata         node          80           59           43         16          0    20.0%
+Asia/Kolkata         pandas        81           69           44         25          0    30.9%
+Asia/Shanghai        ALL          196          152           99         53          0    27.0%
+Asia/Shanghai        terraform     35           24           15          9          0    25.7%
+Asia/Shanghai        node          80           59           44         15          0    18.8%
+Asia/Shanghai        pandas        81           69           40         29          0    35.8%
+Australia/Sydney     ALL          196          152           97         55          0    28.1%
+Australia/Sydney     terraform     35           24           14         10          0    28.6%
+Australia/Sydney     node          80           59           42         17          0    21.2%
+Australia/Sydney     pandas        81           69           41         28          0    34.6%
+spread of naive-only rate across the 8 zones (ALL repos): min 18.4% max 28.1%
+
+== first-response target normal = 240 minutes (n = answered tickets) ==
+zone                 scope          n naive_breach fixed_breach naive_only fixed_only naive_only%
+UTC                  ALL          196          140           95         45          0    23.0%
+UTC                  terraform     35           22           14          8          0    22.9%
+UTC                  node          80           54           36         18          0    22.5%
+UTC                  pandas        81           64           45         19          0    23.5%
+America/Los_Angeles  ALL          196          140          101         39          0    19.9%
+America/Los_Angeles  terraform     35           22           12         10          0    28.6%
+America/Los_Angeles  node          80           54           39         15          0    18.8%
+America/Los_Angeles  pandas        81           64           50         14          0    17.3%
+America/New_York     ALL          196          140          105         35          0    17.9%
+America/New_York     terraform     35           22           12         10          0    28.6%
+America/New_York     node          80           54           41         13          0    16.2%
+America/New_York     pandas        81           64           52         12          0    14.8%
+Europe/London        ALL          196          140           97         43          0    21.9%
+Europe/London        terraform     35           22           16          6          0    17.1%
+Europe/London        node          80           54           36         18          0    22.5%
+Europe/London        pandas        81           64           45         19          0    23.5%
+Europe/Berlin        ALL          196          140           96         44          0    22.4%
+Europe/Berlin        terraform     35           22           16          6          0    17.1%
+Europe/Berlin        node          80           54           36         18          0    22.5%
+Europe/Berlin        pandas        81           64           44         20          0    24.7%
+Asia/Kolkata         ALL          196          140           90         50          0    25.5%
+Asia/Kolkata         terraform     35           22           15          7          0    20.0%
+Asia/Kolkata         node          80           54           39         15          0    18.8%
+Asia/Kolkata         pandas        81           64           36         28          0    34.6%
+Asia/Shanghai        ALL          196          140           90         50          0    25.5%
+Asia/Shanghai        terraform     35           22           14          8          0    22.9%
+Asia/Shanghai        node          80           54           39         15          0    18.8%
+Asia/Shanghai        pandas        81           64           37         27          0    33.3%
+Australia/Sydney     ALL          196          140           88         52          0    26.5%
+Australia/Sydney     terraform     35           22           13          9          0    25.7%
+Australia/Sydney     node          80           54           37         17          0    21.2%
+Australia/Sydney     pandas        81           64           38         26          0    32.1%
+spread of naive-only rate across the 8 zones (ALL repos): min 17.9% max 26.5%
+
+== first-response target low = 480 minutes (n = answered tickets) ==
+zone                 scope          n naive_breach fixed_breach naive_only fixed_only naive_only%
+UTC                  ALL          196          115           61         54          0    27.6%
+UTC                  terraform     35           15            7          8          0    22.9%
+UTC                  node          80           47           29         18          0    22.5%
+UTC                  pandas        81           53           25         28          0    34.6%
+America/Los_Angeles  ALL          196          115           59         56          0    28.6%
+America/Los_Angeles  terraform     35           15            7          8          0    22.9%
+America/Los_Angeles  node          80           47           29         18          0    22.5%
+America/Los_Angeles  pandas        81           53           23         30          0    37.0%
+America/New_York     ALL          196          115           59         56          0    28.6%
+America/New_York     terraform     35           15            7          8          0    22.9%
+America/New_York     node          80           47           28         19          0    23.8%
+America/New_York     pandas        81           53           24         29          0    35.8%
+Europe/London        ALL          196          115           60         55          0    28.1%
+Europe/London        terraform     35           15            7          8          0    22.9%
+Europe/London        node          80           47           28         19          0    23.8%
+Europe/London        pandas        81           53           25         28          0    34.6%
+Europe/Berlin        ALL          196          115           59         56          0    28.6%
+Europe/Berlin        terraform     35           15            7          8          0    22.9%
+Europe/Berlin        node          80           47           27         20          0    25.0%
+Europe/Berlin        pandas        81           53           25         28          0    34.6%
+Asia/Kolkata         ALL          196          115           56         59          0    30.1%
+Asia/Kolkata         terraform     35           15            7          8          0    22.9%
+Asia/Kolkata         node          80           47           26         21          0    26.2%
+Asia/Kolkata         pandas        81           53           23         30          0    37.0%
+Asia/Shanghai        ALL          196          115           58         57          0    29.1%
+Asia/Shanghai        terraform     35           15            7          8          0    22.9%
+Asia/Shanghai        node          80           47           27         20          0    25.0%
+Asia/Shanghai        pandas        81           53           24         29          0    35.8%
+Australia/Sydney     ALL          196          115           60         55          0    28.1%
+Australia/Sydney     terraform     35           15            7          8          0    22.9%
+Australia/Sydney     node          80           47           27         20          0    25.0%
+Australia/Sydney     pandas        81           53           26         27          0    33.3%
+spread of naive-only rate across the 8 zones (ALL repos): min 27.6% max 30.1%
+
+== cause of naive-only breaches (target 240, first match wins) ==
+UTC                  {'weekend': 19, 'overnight': 11, 'same local day': 15}
+America/Los_Angeles  {'weekend': 15, 'overnight': 10, 'same local day': 14}
+America/New_York     {'weekend': 16, 'overnight': 7, 'same local day': 12}
+Europe/London        {'weekend': 19, 'overnight': 8, 'same local day': 16}
+Europe/Berlin        {'weekend': 19, 'overnight': 11, 'same local day': 14}
+Asia/Kolkata         {'weekend': 19, 'overnight': 19, 'same local day': 12}
+Asia/Shanghai        {'weekend': 19, 'overnight': 19, 'same local day': 12}
+Australia/Sydney     {'weekend': 19, 'overnight': 18, 'same local day': 15}
+
+== DST: zone-aware clock vs constant-offset (January offset) clock, target 240 ==
+zone                 scope      n  cross_transit  state_differs_x max_diff_min state_differs_all
+UTC                  no DST in 2025 (offset constant), skipped
+America/Los_Angeles  ALL     196             17                0         60.0              6
+America/New_York     ALL     196             17                1         60.0              3
+Europe/London        ALL     196             17                0         60.0              2
+Europe/Berlin        ALL     196             17                0         60.0              0
+Asia/Kolkata         no DST in 2025 (offset constant), skipped
+Asia/Shanghai        no DST in 2025 (offset constant), skipped
+Australia/Sydney     ALL     196             20                0         60.0              0
+
+== independent per-minute check of the lab clock (my own code, not independent review) ==
+America/New_York     tickets 150 max |lab - brute force| = 0.000000 minutes
+Europe/Berlin        tickets 150 max |lab - brute force| = 0.000000 minutes
+Australia/Sydney     tickets 150 max |lab - brute force| = 0.000000 minutes
+checks 450 worst difference 0.000000 PASS
+
+== Part 3: qa.check_critical on first maintainer reply per answered ticket (no human labels, no accuracy claim) ==
+must-fire controls: 2 of 2 known-bad strings are flagged by qa.check_critical
+hashicorp/terraform    replies   35 flagged   0 (0.0%)
+nodejs/node            replies   80 flagged   0 (0.0%)
+pandas-dev/pandas      replies   81 flagged   0 (0.0%)
+ALL replies 196 flagged 0 (0.0%)  by pattern: {'abuse': 0, 'secret_request': 0}

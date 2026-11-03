@@ -1,0 +1,9 @@
+1a857f3f3d415442c04119c543d8c9be8ea2e58af75a8604652ab920fa729acd  PROTOCOL-v2.md
+0879afc1faf9e2ab3b5050e4b870c2fd5f1ce4b29ca2262181e92e8a1dd541e1  scripts/threading_eval.py
+97b3bbb73dfe9d654ba7d5d2b4904d4765742d0b274ff8042e6c25d21fe5310c  scripts/diagnose_splits.py
+d96d19583c2f7be639c3981632342ea32a692f9a21069cd2f18e3ad6a46fb07e  sample/threading_sample.jsonl
+c41df7ab0ed4fca31db6ac67a58480e26e22d532a4f7e617fe98d77e4b92a83b  scratch/work/full.jsonl
+ed098d55c24ea88fe54c1fb659305f4e8b3d36f0dd17c5ca1eb1566e014fc619  ../src/ticketflow/ingest.py
+e9e2d55057d1e0bacdec82799537d94f6fc8cb7aa808b2d7077321f945203a17  ../src/ticketflow/flow.py
+raw downloads: all six match evidence/raw-sha256-threading.txt (checked 2026-11-03 before the rerun)
+note: ingest.py was simplified after the first scored run (redundant index rewrites removed); scored output was byte-identical before and after

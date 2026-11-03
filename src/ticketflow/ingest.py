@@ -8,8 +8,14 @@ Threading evidence, strongest first:
   2. A "[TF-000001]" token in the subject, accepted ONLY when the sender is already a participant
      of that case. A subject token from an unrelated sender never attaches a message to somebody
      else's case: it opens a new, flagged case instead.
-  3. A reply that arrives before its parent opens a case and remembers the missing parent id; when
-     the parent arrives it joins that case instead of opening a second one.
+  3. A reply that arrives before its parent opens a case and remembers the missing parent id. Every
+     case waiting for the same missing id is remembered (not just the first). When that parent
+     arrives, all those cases and the parent are merged into one: the case with the lowest id
+     survives, the others are absorbed (their ids keep resolving to the survivor). The parent's
+     own headers are checked too, so a parent that answers an indexed case joins that case as well.
+  Merging happens only when a message that connects the cases arrives. Two replies that share a
+  missing parent which never arrives stay in separate cases: the lab does not guess. Only message
+  ids that are missing can trigger a merge; two already-indexed ids in different cases never do.
 
 Bounce and auto-reply detection needs strong evidence (see classify). A subject phrase alone is
 weak evidence: the mail is kept as human mail and flagged, never silently dropped.
@@ -192,7 +198,9 @@ class Ingestor:
         self.cases = {}
         self._seen = set()
         self._index = {}
-        self._pending = {}
+        self._pending = {}  # missing message-id -> [ids of the cases waiting for it]
+        self._merged = {}   # absorbed case id -> case id it was merged into
+        self.merges = []    # {"kept", "absorbed", "by"} for every merge, in order
         self.ignored = []
         self.flagged = []
         self._counter = 0
@@ -202,7 +210,16 @@ class Ingestor:
         self._seq += 1
         return self._seq
 
+    def resolve(self, case_id):
+        """The live case id for an id that may have been absorbed by a merge."""
+        seen = set()
+        while case_id in self._merged and case_id not in seen:
+            seen.add(case_id)
+            case_id = self._merged[case_id]
+        return case_id
+
     def register_outbound(self, case_id, message_id):
+        case_id = self.resolve(case_id)
         mid = clean_message_id(message_id)
         if not mid or case_id not in self.cases:
             return None
@@ -216,8 +233,8 @@ class Ingestor:
             if mid and mid in self._index:
                 return self._index[mid], "message_id"
         m = CASE_REF.search(msg["subject"])
-        if m and m.group(1) in self.cases:
-            cid = m.group(1)
+        if m and self.resolve(m.group(1)) in self.cases:
+            cid = self.resolve(m.group(1))
             if msg["from"] in self.cases[cid]["participants"]:
                 return cid, "subject_token"
             return None, "unauthorized_reference:" + cid
@@ -226,7 +243,41 @@ class Ingestor:
     def _remember_missing_parents(self, msg, case_id):
         for mid in [msg["in_reply_to"]] + msg["references"]:
             if mid and mid not in self._index:
-                self._pending.setdefault(mid, case_id)
+                waiting = self._pending.setdefault(mid, [])
+                if case_id not in waiting:
+                    waiting.append(case_id)
+
+    def _merge(self, keep_id, gone_id, by_mid):
+        """Absorb case gone_id into keep_id. Ids still pointing at gone_id (index, waiting lists) are not
+        rewritten: every lookup passes through resolve(). Nothing is lost: messages, participants, outbound ids,
+        agent status events and the earliest first response all move to the surviving case."""
+        keep, gone = self.cases[keep_id], self.cases.pop(gone_id)
+        self._merged[gone_id] = keep_id
+        self.merges.append({"kept": keep_id, "absorbed": gone_id, "by": by_mid})
+        keep.setdefault("merged_from", []).append(gone_id)
+        keep["merged_from"].extend(gone.get("merged_from", []))
+        keep["messages"].extend(gone["messages"])
+        keep["messages"].sort(key=lambda m: m["at"])
+        for p in gone["participants"]:
+            if p not in keep["participants"]:
+                keep["participants"].append(p)
+        keep["outbound_ids"].extend(gone["outbound_ids"])
+        for f in gone["flags"]:
+            if f not in keep["flags"]:
+                keep["flags"].append(f)
+        if gone["created_at"] < keep["created_at"]:
+            keep["created_at"] = gone["created_at"]
+            for e in keep["event_log"]:
+                if e["seq"] == 0:
+                    e["at"] = gone["created_at"]
+        for e in gone["event_log"]:
+            if e["seq"] != 0:  # the absorbed case's own creation event is replaced by its messages below
+                add_event(keep, e["at"], e["status"], e["rank"], e["seq"])
+        for m in gone["messages"]:
+            add_event(keep, m["at"], "open", RANK_CUSTOMER, self.next_seq())
+        frs = [t for t in (keep["first_response_at"], gone["first_response_at"]) if t is not None]
+        keep["first_response_at"] = min(frs) if frs else None
+        reduce_case(keep)
 
     def _attach(self, case, msg, entry):
         case["messages"].append(entry)
@@ -242,7 +293,7 @@ class Ingestor:
             return {"action": "rejected", "case_id": None, "reason": str(exc)}
         mid = msg["message_id"]
         if mid in self._seen:
-            return {"action": "duplicate", "case_id": self._index.get(mid), "reason": "message_id seen"}
+            return {"action": "duplicate", "case_id": self.resolve(self._index.get(mid)), "reason": "message_id seen"}
         self._seen.add(mid)
         if msg["kind"] != "human":
             self.ignored.append({"message_id": mid, "kind": msg["kind"]})
@@ -253,11 +304,17 @@ class Ingestor:
         if msg["text"] == "" and not msg["raw_empty"]:
             flags.append("no_new_text_after_stripping")
         extra = {"at": msg["at"], "warnings": list(msg["warnings"])}
-        if mid in self._pending:  # a reply to this message arrived first
-            case_id = self._pending.pop(mid)
+        waiting = self._pending.pop(mid, [])  # replies to this message arrived before it
+        found, how = self._find_case(msg)
+        candidates = list(dict.fromkeys(self.resolve(c) for c in waiting + ([found] if found else [])))
+        if candidates:
+            case_id = min(candidates)
+            absorbed = [c for c in candidates if c != case_id]
+            for other in absorbed:
+                self._merge(case_id, other, mid)
             case = self.cases[case_id]
             self._attach(case, msg, entry)
-            if msg["at"] < case["created_at"]:
+            if waiting and msg["at"] < case["created_at"]:
                 case["created_at"] = msg["at"]
                 for e in case["event_log"]:
                     if e["seq"] == 0:
@@ -265,13 +322,11 @@ class Ingestor:
                 reduce_case(case)
             self._index[mid] = case_id
             self._remember_missing_parents(msg, case_id)
-            return dict({"action": "threaded", "case_id": case_id, "reason": "parent_arrived"}, **extra)
-        case_id, how = self._find_case(msg)
-        if case_id is not None:
-            case = self.cases[case_id]
-            self._attach(case, msg, entry)
-            self._index[mid] = case_id
-            return dict({"action": "threaded", "case_id": case_id, "reason": "reply via " + how}, **extra)
+            reason = "parent_arrived" if waiting else "reply via " + how
+            result = dict({"action": "threaded", "case_id": case_id, "reason": reason}, **extra)
+            if absorbed:
+                result["merged"] = absorbed
+            return result
         if how:
             flags.append(how)
         self._counter += 1
@@ -282,6 +337,7 @@ class Ingestor:
             "id": case_id, "subject": msg["subject"], "requester": msg["from"], "created_at": msg["at"],
             "tz": get_tz(tz_name).key, "priority": priority, "queue": queue, "status": "open",
             "messages": [entry], "participants": [msg["from"]], "outbound_ids": [], "flags": flags,
+            "merged_from": [],
             "event_log": [{"at": msg["at"], "status": "open", "rank": RANK_AGENT, "seq": 0}],
             "status_events": [(msg["at"], "open")],
             "first_response_at": None, "resolved_at": None, "empty_body": msg["raw_empty"],

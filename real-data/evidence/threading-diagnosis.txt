@@ -1,0 +1,5 @@
+    1  split, other cause
+   56  split, two cases opened by messages pointing at the same not-yet-arrived parent
+   90  thread intact
+missing parent ids referenced by 2+ opening messages: 150
+cases total 380 ignored 0 flagged 0

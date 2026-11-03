@@ -1,13 +1,32 @@
 # TicketFlow Reliability Lab
 
-Status: **CI-PASSING**, independent evaluation pending. Last full remote CI run: commit `011a310`, [run 41516530731](https://github.com/ASPs-Git-Hub/ticketflow-reliability-lab/actions/runs/41516530731), on Python 3.9, 3.10 and 3.12: unit tests, the simulation, the QA evaluation and the mutation check. The confidentiality gate (`check-confidential.sh`) was run locally by me, not in CI. Every label set was written by me with an AI model, so none is independent human labelling. Internal label: BUILT_UNVERIFIED until someone outside this project reproduces the results.
+Status: **BUILT_UNVERIFIED**: tests and planted-defect checks were run by me locally on 2026-11-03; remote CI has not yet run on the latest changes. The previous commit passed CI (commit `011a310`, [run 41516530731](https://github.com/ASPs-Git-Hub/ticketflow-reliability-lab/actions/runs/41516530731), Python 3.9, 3.10 and 3.12: unit tests, the simulation, the QA evaluation and the mutation check). No outside person has checked the results. The confidentiality gate (`check-confidential.sh`) was run locally by me, not in CI. Every label set was written by me with an AI model, so none is independent human labelling.
 I applied review round 2 (two independent reviews, 45 findings) on 2026-11-03; see
 `docs/REVIEW_ROUND2.md` for the accept / reject table. Nobody has reviewed the result a third time.
 
-An independent, synthetic-data demonstration of the reliability problems a help desk runs into when it handles email: duplicate cases, replies that open new cases, bounces that open cases,
+**Independent technical demonstration. The tests use made-up cases on purpose ("Northwind Cloud"); the main results use real public data (see `real-data/`). Not client work.**
+
+## Real-data results
+Full write-up, rules and raw output: [`real-data/README.md`](real-data/README.md). Two real sets: the python-dev mailing list (6 months, 1,618 messages, 147 conversations of 2 or more messages) to test threading, and 196 answered GitHub issues to test business-hours SLA clocks.
+
+The first run found a real bug. When two replies arrive before the message they answer, the lab opened two tickets and never joined them. I fixed it (`src/ticketflow/ingest.py`, `flow.py`) and ran the same test again. Conversations (of 147) that came out as exactly one correct ticket, mean over 5 seeds:
+
+| Mail damage | Before the fix | After the fix |
+|---|---|---|
+| S1: shuffled delivery order | 89.2 | 147 |
+| S2: S1 plus 10% repeats | 94.0 | 147 |
+| S3: S2 plus lost reply headers | 77.2 | 121.8 |
+
+- 0 messages landed in the wrong conversation, before and after, in every run.
+- In S3, 21.2 of the 25.2 misses cannot be fixed from headers alone. The other 4.0 I left open on purpose, because joining two existing tickets on one message could let a stranger fuse two customers' tickets.
+- On the 196 GitHub issues, the plain wall-clock timer calls 17.9% to 26.5% of tickets late when the business-hours timer says they are not, depending on the time zone assumed. Daylight saving time mattered less than weekends.
+- The QA critical-fail rule fired on 0 of 196 real replies. There are no human labels, so this says nothing about accuracy.
+- This was a re-test, not a blind test: I ran the new code on this data while building the fix.
+
+A demonstration of the reliability problems a help desk runs into when it handles email: duplicate cases, replies that open new cases, bounces that open cases,
 SLA clocks that ignore business hours, alerts that fire forever, unassigned cases, and QA scoring
 that nobody has checked against human judgement. Fictional company ("Northwind Cloud"), Python 3
-standard library only (3.9 and later), built from general engineering patterns. No real helpdesk or customer data is involved.
+standard library only (3.9 and later), built from general engineering patterns. No real helpdesk or customer data is involved; the real-data runs use public mailing-list and GitHub data.
 
 ## Layout
 
@@ -25,7 +44,7 @@ src/ticketflow/
   flow.py        TicketFlow: the fixed implementation composing the modules
   naive.py       NaiveTicketFlow: the usual defects, same interface
   sim.py         seeded simulation plus an audit judged by an independent oracle
-tests/           unittest suite (212 tests): contract, unit, QA, simulation, round 2, review record
+tests/           unittest suite (233 tests): contract, unit, QA, simulation, round 2, review record, thread merge (21, test_merge.py)
 data/            qa_labels_a.json (tuning), qa_labels_b.json (frozen), qa_labels_c.json (new)
 docs/            REVIEW_ROUND2.md (accept / reject record), LABELING_RULES.md
 scripts/         run_qa_eval.py, run_simulation.py, mutate.py
@@ -42,8 +61,8 @@ monorepo root (it sets `working-directory` and a path filter). That copy has not
 
 ## Results (all produced by the commands in evidence/)
 
-Tests: 212 run, all pass, on Python 3.14.6, 3.12 and 3.9.6 (evidence/test-run.txt, test-run-py312.txt,
-test-run-py39.txt). Python 3.10 ran only in CI.
+Tests: 233 run now, all pass on Python 3.14 (real-data/evidence/v2-tests.txt). At round 2 it was 212, which passed on Python 3.14.6, 3.12 and 3.9.6 (evidence/test-run.txt, test-run-py312.txt,
+test-run-py39.txt). Python 3.10 ran only in CI; the 233 were not rerun on 3.9, 3.10 or 3.12.
 
 Contract tests: 18 tests, each targeting one naive defect. They run against both implementations.
 TicketFlow passes all 18. NaiveTicketFlow is caught by all 18: 17 by an AssertionError and one
@@ -91,8 +110,9 @@ to be able to fail.
 
 ### Mutation (scripts/mutate.py)
 
-One-line defects are planted in a temp copy of the lab and the whole suite is run on each. Result:
-see evidence/mutation-run.txt for the exact count and for whether each kill was by an assertion or by
+One-line defects are planted in a temp copy of the lab and the whole suite is run on each. Result now: 127 planted defects, 127 caught
+(real-data/evidence/v2-mutants.txt). The round 2 count is in evidence/mutation-run.txt
+for the exact count and for whether each kill was by an assertion or by
 an import crash. The list covers the previous mutants (renamed where the code moved) and new ones for
 authenticated threading, outbound indexing, late-parent reconciliation, the reducer ordering, bounce
 and auto-reply evidence, RFC 3834 parsing, quote stripping, clause-local negation, and the audit
@@ -197,3 +217,4 @@ paraphrase, and patching against B or C would turn those sets into tuning sets, 
   only unit tested.
 - Single process, in memory, no persistence, no concurrency control, restart loses deduplication.
 - CI ran once remotely (commit `011a310`) and passed on 3.9, 3.10 and 3.12; that is a second execution of my own scripts, not independent validation.
+- Real-data limits: threading uses one mailing list and six months, and the mail damage (shuffling, repeats, lost headers) is my invention. The right answer is the header chain, which can itself be wrong. GitHub issues are not help-desk tickets, and the 120 unanswered issues were left out. The re-test is not blind. Several hand classifications are mine. Nobody else has checked any of it.
