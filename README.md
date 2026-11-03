@@ -1,6 +1,6 @@
 # TicketFlow Reliability Lab
 
-Status: **BUILT_UNVERIFIED**: tests and planted-defect checks were run by me locally on 2026-11-03; remote CI has not yet run on the latest changes. The previous commit passed CI (commit `011a310`, [run 41516530731](https://github.com/ASPs-Git-Hub/ticketflow-reliability-lab/actions/runs/41516530731), Python 3.9, 3.10 and 3.12: unit tests, the simulation, the QA evaluation and the mutation check). No outside person has checked the results. The confidentiality gate (`check-confidential.sh`) was run locally by me, not in CI. Every label set was written by me with an AI model, so none is independent human labelling.
+Status: **CI-PASSING**, independent evaluation pending. Last full remote CI run: commit `6e659f7`, [run 41601105565](https://github.com/ASPs-Git-Hub/ticketflow-reliability-lab/actions/runs/41601105565), Python 3.9, 3.10 and 3.12: unit tests, the simulation, the QA evaluation and the planted-defect check. I also ran everything locally on 2026-11-03. No outside person has checked the results. The confidentiality gate (`check-confidential.sh`) was run locally by me, not in CI. Every label set was written by me with an AI model, so none is independent human labelling.
 I applied review round 2 (two independent reviews, 45 findings) on 2026-11-03; see
 `docs/REVIEW_ROUND2.md` for the accept / reject table. Nobody has reviewed the result a third time.
 
